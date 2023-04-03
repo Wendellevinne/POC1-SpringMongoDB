@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Field
 data class UserModel (
     @Id
     var id: String? = null,
-    var nome: String,
+    var name: String,
     var email: String,
     @Field("userID")
     var userID: Int?

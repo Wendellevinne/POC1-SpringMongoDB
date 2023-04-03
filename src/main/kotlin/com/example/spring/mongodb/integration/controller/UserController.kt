@@ -17,8 +17,8 @@ class UserController (val userService: UserService) {
     @GetMapping("/users")
     fun getAll(): ResponseEntity<List<UserModel>> = ResponseEntity.ok(userService.getAllUsers())
 
-    @GetMapping("/users/{nome}")
-    fun getByNome(@PathVariable nome: String): ResponseEntity<Optional<UserModel?>> = ResponseEntity.ok(userService.getUserByNome(nome))
+    @GetMapping("/users/{name}")
+    fun getByName(@PathVariable name: String): ResponseEntity<Optional<UserModel?>> = ResponseEntity.ok(userService.getUserByName(name))
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
@@ -30,5 +30,5 @@ class UserController (val userService: UserService) {
 
     @DeleteMapping("/users/{userID}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteUser(@PathVariable userID: Int) = userService.deleteUser(userID);
+    fun deleteUser(@PathVariable userID: Int) = userService.deleteUser(userID)
 }
