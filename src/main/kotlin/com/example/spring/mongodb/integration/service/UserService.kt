@@ -12,8 +12,8 @@ class UserService(val userRepository: UserRepository) {
         return userRepository.findAll().toList().sortedBy { userModel -> userModel.userID }
     }
 
-    fun getUserByNome(nome: String): Optional<UserModel?> {
-        return userRepository.findByNome(nome)
+    fun getUserByName(name: String): Optional<UserModel?> {
+        return userRepository.findByName(name)
     }
 
     fun saveUser(user: UserModel) {
@@ -23,7 +23,8 @@ class UserService(val userRepository: UserRepository) {
                 return
             } else throw Exception("Usuário já cadastrado!!")
         }
-        user.userID = userRepository.findByUserIDIsGreaterThanEqual(userRepository.findAll().lastIndex).get().last().userID
+        if (userRepository.findAll().size != 0) user.userID = userRepository.findAll().sortedBy { it.userID }.last().userID?.plus(1)
+        else user.userID = 1
         userRepository.save(user)
     }
 
