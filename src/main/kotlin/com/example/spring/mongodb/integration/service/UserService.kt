@@ -23,7 +23,8 @@ class UserService(val userRepository: UserRepository) {
                 return
             } else throw Exception("Usuário já cadastrado!!")
         }
-        user.userID = userRepository.findAll().sortedBy { it.userID }.last().userID?.plus(1)
+        if (userRepository.findAll().size != 0) user.userID = userRepository.findAll().sortedBy { it.userID }.last().userID?.plus(1)
+        else user.userID = 1
         userRepository.save(user)
     }
 
